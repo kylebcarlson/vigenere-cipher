@@ -2,6 +2,7 @@
 import getpass
 import itertools
 import string
+from urlparse import urlparse
 
 
 #builds standard alphabet
@@ -55,10 +56,13 @@ def encrypt():
     	except ValueError:
     		translation.append(v)
     	
-    new_msg = ''.join(x if x in alphabet else x for x in translation).upper()
-    
-    print '\n%s\n' % new_msg
+    new_msg = ''.join(x if x in alphabet else x for x in translation)
 
+
+    if urlparse(new_msg).scheme != '':
+    	print '\n%s\n' % new_msg.lower()
+    else:
+    	print '\n%s\n' % new_msg.upper()
 
 
 def decrypt():
@@ -88,7 +92,10 @@ def decrypt():
     
     orig_msg = ''.join(x for x in translation).upper()
 
-    print '\n%s\n' % orig_msg
+    if urlparse(orig_msg).scheme != '':
+    	print '\n%s\n' % orig_msg.lower()
+    else:
+    	print '\n%s\n' % orig_msg.upper()
 
 
 if __name__ == '__main__':
