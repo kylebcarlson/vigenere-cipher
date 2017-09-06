@@ -2,12 +2,10 @@
 import getpass
 import itertools
 import string
-from urlparse import urlparse
 
 
 #builds standard alphabet
 alphabet = [chr(i) for i in range(ord('a'), ord('z')+1)]
-
 
 #user selects action
 def main():
@@ -56,13 +54,9 @@ def encrypt():
     	except ValueError:
     		translation.append(v)
     	
-    new_msg = ''.join(x if x in alphabet else x for x in translation)
+    new_msg = ''.join(x if x in alphabet else x for x in translation).upper()
 
-
-    if urlparse(new_msg).scheme != '':
-    	print '\n%s\n' % new_msg.lower()
-    else:
-    	print '\n%s\n' % new_msg.upper()
+    print '\n%s\n' % new_msg
 
 
 def decrypt():
@@ -92,10 +86,7 @@ def decrypt():
     
     orig_msg = ''.join(x for x in translation).upper()
 
-    if urlparse(orig_msg).scheme != '':
-    	print '\n%s\n' % orig_msg.lower()
-    else:
-    	print '\n%s\n' % orig_msg.upper()
+    print '\n%s\n' % orig_msg
 
 
 if __name__ == '__main__':
