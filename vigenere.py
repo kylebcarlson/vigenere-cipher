@@ -6,7 +6,7 @@ import string
 
 #builds standard alphabet
 alphabet = [chr(i) for i in range(ord('a'), ord('z')+1)]
-punctuation = '.,:;!?\'\"\[]{}()@#$%^&*~`|'
+
 
 #user selects action
 def main():
@@ -37,16 +37,12 @@ def encrypt():
     key = list(key.replace(' ',''))
 
     key_indices = [alphabet.index(l) for l in key]
-    #print key_indices
 	
     alphas = [new_alpha(x) for x in key_indices]
-    #print alphas
     
     msg = list((raw_input('Please enter a message to encrypt:\n')).lower())
-    #print msg
 
     msg_indices = [alphabet.index(m) if m in alphabet else m for m in msg]
-    #print msg_indices
 
     c = itertools.cycle(alphas)
 
@@ -80,7 +76,6 @@ def decrypt():
     c = itertools.cycle(alphas)
     
     msg_indices = [next(c).index(i) if i in alphabet else i for i in msg]
-    #print msg_indices
     
     translation = []
 
