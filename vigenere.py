@@ -55,8 +55,7 @@ def encrypt():
     for v in msg_indices:
     	try:
     		v = int(v)
-    		v = next(c)[v]
-    		translation.append(v)
+    		translation.append(next(c)[v])
     	except ValueError:
     		translation.append(v)
     	
@@ -88,8 +87,7 @@ def decrypt():
     for t in msg_indices:
     	try:
     		t = int(t)
-    		t = alphabet[t]
-    		translation.append(t)
+    		translation.append(alphabet[t])
     	except ValueError:
     		translation.append(t)
     
