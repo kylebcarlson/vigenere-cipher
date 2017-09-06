@@ -1,11 +1,12 @@
 
 import getpass
 import itertools
+import string
 
 
 #builds standard alphabet
 alphabet = [chr(i) for i in range(ord('a'), ord('z')+1)]
-
+punctuation = '.,:;!?\'\"\[]{}()@#$%^&*~`|'
 
 #user selects action
 def main():
@@ -44,14 +45,22 @@ def encrypt():
     msg = list((raw_input('Please enter a message to encrypt:\n')).lower())
     #print msg
 
-    msg_indices= [alphabet.index(m) if m != ' ' else ' ' for m in msg]
+    msg_indices = [alphabet.index(m) if m in alphabet else m for m in msg]
     #print msg_indices
 
     c = itertools.cycle(alphas)
-    
-    translation = [next(c)[v] if v != ' ' else v for v in msg_indices]
-   
-    new_msg = ''.join(x for x in translation).upper()
+
+    translation = []
+
+    for v in msg_indices:
+    	try:
+    		v = int(v)
+    		v = next(c)[v]
+    		translation.append(v)
+    	except ValueError:
+    		translation.append(v)
+    	
+    new_msg = ''.join(x if x in alphabet else x for x in translation).upper()
     
     print '\n%s\n' % new_msg
 
@@ -71,11 +80,19 @@ def decrypt():
 
     c = itertools.cycle(alphas)
     
-    msg_indices = [next(c).index(i) if i != ' ' else i for i in msg]
+    msg_indices = [next(c).index(i) if i in alphabet else i for i in msg]
     #print msg_indices
+    
+    translation = []
 
-    translation = [alphabet[t] if t != ' ' else t for t in msg_indices]
-
+    for t in msg_indices:
+    	try:
+    		t = int(t)
+    		t = alphabet[t]
+    		translation.append(t)
+    	except ValueError:
+    		translation.append(t)
+    
     orig_msg = ''.join(x for x in translation).upper()
 
     print '\n%s\n' % orig_msg
