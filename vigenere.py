@@ -1,7 +1,6 @@
 
 import getpass
 import itertools
-import string
 
 
 #builds standard alphabet
